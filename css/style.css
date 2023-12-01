@@ -5,7 +5,8 @@
     --dark-slate-grey: hsl(234, 29%, 20%);
     --charcoal-grey: hsl(235, 18%, 26%);
     --grey: hsl(231, 7%, 60%);
-    --white: hsl(0, 0%, 100%)
+    --white: hsl(0, 0%, 100%);
+    --box-shadow: 0 15px 15px 15px rgba(0, 0, 0, .2);
 }
 
 
@@ -29,10 +30,10 @@ body {
 
 main {
     max-width: 100vw;
+    height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: calc(100vh - 10px);
 }
 
 .container {
@@ -46,6 +47,7 @@ main {
     justify-content: center;
     position: relative;
     padding: 2rem 1%;
+    box-shadow: var(--box-shadow);
 }
 
 .left__component {
@@ -85,6 +87,7 @@ form label {
     font-size: 2rem;
     font-weight: 400;
     color: var(--dark-slate-grey);
+    text-transform: none;
 }
 
 form input {
@@ -97,6 +100,24 @@ form input {
     font-weight: 400;
     color: var(--dark-slate-grey);
     margin-bottom: 2rem;
+    cursor: pointer;
+}
+
+.error-message {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    color: red;
+    font-size: 12px;
+    display: none;
+}
+
+.error-message.active {
+    display: block;
+}
+
+input[type="email"].error-message {
+    border-color: red;
 }
 
 form button {
@@ -109,11 +130,19 @@ form button {
     font-size: 2rem;
     font-weight: 700;
     cursor: pointer;
+    transition: background-color .3s ease-in-out;
+}
 
+button a {
+    color: var(--white);
+}
+
+form button:hover {
+    background-color: var(--tomato);
+    box-shadow: 0 10px 15px 5px rgba(0, 0, 0, .2);
 }
 
 .right__component {
-    /* width: 20%;s */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -122,6 +151,20 @@ form button {
 .right__component img {
     width: 100%;
     height: auto;
+}
+
+.attribution { 
+    font-size: 2rem; 
+    text-align: center; 
+    color: var(--white);
+}
+
+.attribution a { 
+    color: var(--tomato); 
+}
+
+.attribution a:hover {
+    color: var(--grey);
 }
 
 
@@ -155,12 +198,23 @@ form button {
 
 
 @media screen and (max-width: 768px) {
+    html {
+        font-size: 55%;
+    }
+
     main {
         flex-direction: column;
+        max-width: 1000px;
+        padding: 1rem 1%;
     }
 
     .container {
-        flex-direction: column;
+        border-radius: 2rem;
+        height: 60vh;
+        padding: 2rem 5%;
+        justify-content: center;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
     }
 
     .left__component {
@@ -175,23 +229,173 @@ form button {
         width: 100%;
         height: auto;
     }
+
+    .left__component {
+        width: 100%;
+        padding: 2rem 10%;
+    }
+    
+    .left__component h1 {
+        font-size: 3rem;
+    }
+    
+    .left__component p {
+        font-size: 2rem;
+    }
+
+    ul {
+        font-size: 1.6rem;
+        line-height: 2rem;
+}
+
+    .right__component {
+        position: relative;
+    }
+    
+    .right__component img {
+        width: 80%;
+        height: auto;
+    }
+
+    form label {
+        font-size: 1.8rem;
+    }
+    
+    form input {
+        font-size: 1.6rem;
+    }
+
+    form button {
+        font-size: 1.4rem;
+    }
 }
 
 
 
 
 
+@media screen and (max-width: 550px) {
+    
+    body {
+        overflow-x: hidden;
+        width: 100%;
+        background: transparent;
+    }
 
+    main {
+        height: 110vh;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background-color: var(--white);
+    }
 
+    .container {
+        border-radius: 0;
+        height: 100vh;
+        max-width: 100%;
+        width: 100%;
+        padding: 2rem;
+        justify-content: center;
+        display: block;
+        box-shadow: none;
+        position: relative;
+    }
 
+    .left__component {
+        width: 100%;
+        text-align: left;
+        align-items: start;
+        margin-top: -55%;
+        position: absolute;
+        top: 0;
+        height: 50vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: url('../assets/images/illustration-sign-up-desktop.svg') no-repeat;
+        background-size: cover;
+        background-position: center;
+        transform: translate(-50%, -50%);
+        top: 50%; 
+        left: 50%;
+        bottom: 50%;
+        border-bottom-left-radius: 2rem;
+        border-bottom-right-radius: 2rem;
+        z-index: 1000;
+    }
 
+    svg {
+        display: none;
+    }
+    
+    
+    .left__component h1 {
+        font-size: 6rem;
+        position: absolute;
+        left: 0;
+        transform: translate(1%, -40%);
+        top: 110%;
+        padding: 2rem 5%;
+    }
+    
+    .left__component p {
+        font-size: 3rem;
+        position: absolute;
+        left: 0;
+        transform: translate(1%, -40%);
+        top: 130%;
+        padding: 2rem 5%;
+    }
 
+    ul {
+        font-size: 2.5rem;
+        line-height: 4rem;
+        position: absolute;
+        left: 0;
+        transform: translate(1%, -40%);
+        top: 148%;
+        padding: 2rem 5%;
+    }
 
-.attribution { 
-    font-size: 2rem; 
-    text-align: center; 
-    color: var(--white);
+    form label {
+        font-size: 2rem;
+        position: absolute;
+        left: 0;
+        transform: translate(1%, -40%);
+        top: 175%;
+        padding: 2rem 5%;
+    }
+    
+    form input {
+        font-size: 2rem;
+        position: absolute;
+        /* left: 0; */
+        transform: translate(-10%, -50%);
+        max-width: 100vw;
+        top: 185%;
+        padding: 4rem 10%;
+    }
+
+    form button {
+        font-size: 3rem;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 195%;
+        padding: 4rem;
+    }
+
+    .attribution { 
+        color: var(--charcoal-grey);
+    }
 }
-.attribution a { 
-    color: var(--tomato); 
-}
+
+
+
